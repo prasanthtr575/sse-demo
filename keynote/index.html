@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Server-Sent Events</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="fade-in">Why do we use Server Sent Events?</section>
+				<section data-transition="fade-in">Server-Sent Events allow a web page to get updates from a server</section>
+				<section data-transition="fade-in">
+					<h3>Some Scenarios</h3>
+					<p class="fragment fade-in" data-fragment-index="1">Share market updates</p>
+					<p class="fragment fade-in" data-fragment-index="2">Election results</p>
+					<p class="fragment fade-in" data-fragment-index="3">Match live scores</p>
+					<p class="fragment fade-in" data-fragment-index="4">Twitter updates</p>
+				</section>
+				<section data-transition="fade-in">How can we implement such scenarios?</section>
+				<section data-transition="fade-in">
+					<h3>Polling</h3>
+					<p class="fragment fade-in" data-fragment-index="1">Polling is a traditional technique used by the vast majority of AJAX applications</p>
+				</section>
+				<section data-transition="fade-in">
+					<code style="text-align:left;">
+						<small>
+							setInterval(function(){<br>
+							&nbsp;&nbsp;&nbsp;$.ajax({ url: "server", success: function(data){<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Update your dashboard gauge <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;salesGauge.setValue(data.value); <br>
+							&nbsp;&nbsp;&nbsp;}, dataType: "json"}); <br>
+							}, 30000);
+						</small>
+					</code>
+					<p class="fragment fade-in" data-fragment-index="1">Polling creates greater HTTP overhead</p>
+					<p class="fragment fade-in" data-fragment-index="2">If the ajax call fails?</p>
+				</section>
+				<section>
+					<h4>Long Polling</h4>
+					<code class="fragment fade-in" data-fragment-index="1" style="text-align:left;">
+						<small>
+							(function poll() {<br>
+							&nbsp;&nbsp;&nbsp;setTimeout(function() {<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ajax({ url: "server", success: function(data) {<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sales.setValue(data.value);<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, dataType: "json", complete: poll });<br>
+							&nbsp;&nbsp;&nbsp;}, 30000);<br>
+							})();<br>
+						</small>
+					</code>
+					<p class="fragment fade-in" data-fragment-index="2">Usage of more server resources</p>
+				</section>
+				<section data-transition="fade-in">
+					<p>Those are old stories</p>
+					<h3 class="fragment fade-in" data-fragment-index="1">Real Time Web applications</h3>
+				</section>
+				<section data-transition="zoom">
+					<h1>Websockets</h1>
+					<img src="images/websocket-logo.jpeg" style="background: none; border: none; box-shadow: none;">
+				</section>
+				<section data-transition="fade-in">
+					<p>TCP based protocol providing full duplex communication link between client and server</p>
+					<p class="fragment fade-in" data-fragment-index="1">Why do we use Server Sent Events?</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>server Sent Events</h3>
+					<p class="fragment fade-in" data-fragment-index="1">EventSource JS API receive server-sent event notifications</p>
+					<p class="fragment fade-in" data-fragment-index="2">'Content-Type': 'text/event-stream'</p>
+				</section>
+				<section data-transition="zoom">
+					<i style="font-size: 70px;">Demo</i>
+				</section>
+				<section data-transition="fade-in">
+					<h4>Events</h4>
+					<p class="fragment fade-in" data-fragment-index="1" style="text-align:left; padding-left: 12%;">'onopen' - When a connection to the server is opened</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="text-align:left; padding-left: 12%;">'onmessage' - When a message is received</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="text-align:left; padding-left: 12%;">'onerror' - When an error occurs</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>Event Stream Format</h3>
+					<p>
+						data: My message\n\n
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>Multiline Data</h3>
+					<p style="text-align:left; padding-left: 33%;">
+						data: first line\n <br>
+						data: second line\n\n
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>JSON Data</h3>
+					<p style="text-align:left; padding-left: 35%;">
+						data: {\n <br>
+						data: "msg": "hello world",\n <br>
+						data: "id": 12345\n <br>
+						data: }\n\n
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>Associating an ID with an Event</h3>
+					<p style="text-align:left; padding-left: 40%;">
+						id: 12345\n <br>
+						data: GOOG\n <br>
+						data: 556\n\n <br>
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h4>Controlling the Reconnection-timeout</h4>
+					<p style="text-align:left; padding-left: 35%;">
+						retry: 10000\n <br>
+						data: hello world\n\n <br>
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>Specifying an event name</h3>
+					<p style="text-align:left; padding-left: 20%;">
+						data: {"msg": "First message"}\n\n <br>
+						event: userlogon\n <br>
+						data: {"username": "John123"}\n\n <br>
+						event: update\n <br>
+						data: {"username": "John123"}\n\n
+					</p>
+				</section>
+				<section data-transition="fade-in">
+					<h4>Specifying an event name</h4>
+					<p style="text-align:left; padding-left: 20%;">
+						<p style="text-align:left; padding-left: 18%; font-size: 30px;">
+							source.addEventListener('message', function(e) { <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;var data = JSON.parse(e.data); <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;	console.log(data.msg); <br>
+							}, false); <br>
+						</p>
+						<p style="text-align:left; padding-left: 18%; font-size: 30px;">
+							source.addEventListener('userlogon', function(e) { <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;var data = JSON.parse(e.data); <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;console.log('User login:' + data.username); <br>
+							}, false); <br>
+						</p>
+						<p style="text-align:left; padding-left: 18%; font-size: 30px;">
+							source.addEventListener('update', function(e) { <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;var data = JSON.parse(e.data); <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;console.log(data.username + ' is now ' + data.emotion); <br>
+							}, false); <br>
+						</p>
+					</p>
+				</section>
+				<section data-transition="zoom">
+					<i style="font-size: 70px;cursor:pointer">Demo</i>
+				</section>
+				<section data-transition="fade-in">
+					<img src="images/kangooroos.jpg" style="background: none; border: none; box-shadow: none; width: 70%; height: 70%">
+				</section>
+				<section data-transition="fade-in">
+					<h3>Websockets Vs SSE</h3>
+					<ul>
+						<li class="fragment fade-in" data-fragment-index="1">Communication link between client and server</li>
+						<li class="fragment fade-in" data-fragment-index="2">Server resources</li>
+						<li class="fragment fade-in" data-fragment-index="3">(re)connection management, state reconciliation</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Points to remember</h3>
+					<ul>
+						<li class="fragment fade-in" data-fragment-index="1">Push Technology over an HTTP connection</li>
+						<li class="fragment fade-in" data-fragment-index="2">Served with the “text/event-stream” MIME type</li>
+						<li class="fragment fade-in" data-fragment-index="3">Event Data format</li>
+						<li class="fragment fade-in" data-fragment-index="4">Automatically attempt to reconnect</li>
+					</ul>
+				</section>
+				<section data-transition="slide">
+					<h1>Questions ?</h1>
+					<div class="container" style="padding-left: 30%; padding-top: 5%;">
+						<div class="color01">
+							<div class="color02">
+								<div class="color03">
+									<div class="color04">
+										<div class="color05">
+											<div class="color06">
+												<div class="color01">
+													<div class="color02">
+														<div class="color03">
+															<div class="color04">
+																<div class="color05">
+																	<div class="color06">
+																		<div class="color01">
+																			<div class="color02">
+																				<div class="color03">
+																					<div class="color04">
+																						<div class="color05 center-div"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section data-transition="zoom">
+					<h1>Thank You</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

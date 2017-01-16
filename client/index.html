@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html ng-app="UPDT">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Demo</title>
+</head>
+
+<body>
+    <div ng-controller="DashController">
+        {{vm.text}}{{msg}}
+        <div class="track">
+            <ul id="train">
+                <li ng-repeat="item in data" ng-show="data.length">
+                    <span><b>{{item.name}}</b></span>
+                    <span>{{item.val}}</span>
+                    <span class="{{item.growth}}"></span>
+                </li>
+            </ul>
+            <div ng-hide="data.length" class="loader">Loading...</div>
+        </div>
+    </div>
+    <div class="gridContainer web">
+        <div class="vBox hBoxContainer">
+            <div class="hbox nodejs bg leftTop"></div>
+            <div class="hbox mHBox"></div>
+            <div class="hbox html5 bg centerTop"></div>
+            <div class="hbox mHBox"></div>
+            <div class="hbox css3 bg rightTop"></div>
+        </div>
+        <div class="vBox mVBox hBoxContainer">
+            <div class="hbox vBoxContainer">
+                <div class="vBox mVBox"></div>
+                <div class="vBox svg bg leftCenter"></div>
+                <div class="vBox mVBox"></div>
+            </div>
+            <div class="hbox mHBox">
+                <h1>Web</h1>
+            </div>
+            <div class="hbox vBoxContainer">
+                <div class="vBox mVBox"></div>
+                <div class="vBox javascript bg rightCenter"></div>
+                <div class="vBox mVBox"></div>
+            </div>
+        </div>
+        <div class="vBox hBoxContainer">
+            <div class="hbox webrtc bg leftBottom"></div>
+            <div class="hbox mHBox"></div>
+            <div class="hbox w3c bg centerBottom"></div>
+            <div class="hbox mHBox"></div>
+            <div class="hbox websocket bg rightBottom"></div>
+        </div>
+    </div>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> CDN -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="src/scroller.js"></script>
+    <script src="lib/angular/1.5.9/angular.js"></script>
+    <script src="src/app.js"></script>
+</body>
+
+</html>

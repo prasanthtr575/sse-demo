@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+html, body{
+    height: 100%;
+}
+
+body {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+}
+
+.web {
+    flex: 1
+}
+
+.track {
+    overflow: hidden;    
+}
+
+#train {
+    list-style: none;
+    display: flex;
+    display: -webkit-flex;
+}
+
+#train li {
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 30px;
+    color: #fffffF;
+    /*background-color: darkslateblue;*/
+    /*position: relative;
+    -webkit-animation: run 12s infinite; 
+    animation: run 12s infinite;
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;*/
+    background: -webkit-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -o-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -ms-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -moz-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+}
+
+.up {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    height: 0px;            
+    border-bottom: 25px solid #008000;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    top:1px;
+}
+.down {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    border-top: 25px solid mediumvioletred;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    top: 3px;
+}
+
+.freeze {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    border-top: 25px solid orange;
+    border-left: 14px solid orange;
+    border-right: 14px solid orange;
+    top: 3px;
+}
+
+.loader {
+    padding: 10px;
+    font-size: 30px;
+    color: #fffffF;
+    background: -webkit-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -o-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -ms-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: -moz-linear-gradient(top, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(36, 37, 61) 54%, rgb(95, 94, 113) 94%, rgb(99, 99, 117) 100%);
+}
+
+.gridContainer {
+    height: 100%;
+    background: white;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 60px;
+}
+.vBox {
+    height: 200px;
+}
+
+.mVBox {
+    flex: 1;
+    align-items: center;
+    text-align: center;
+}
+
+.hBoxContainer {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+}
+
+.hbox {
+    width: 200px;
+}
+
+.mHBox {
+    flex: 1;
+}
+
+.vBoxContainer {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+}
+
+.bg {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+
+.w3c {
+    background-image: url('../images/w3c.svg');
+}
+
+.html5 {
+    background-image: url('../images/html-5.svg');
+}
+
+.css3 {
+    background-image: url('../images/css-3.svg');
+}
+
+.webrtc {
+    background-image: url('../images/webrtc.svg');
+}
+
+.websocket {
+    background-image: url('../images/websocket.svg');
+}
+
+.javascript {
+    background-image: url('../images/javascript.svg');
+}
+
+.svg {
+    background-image: url('../images/svg.svg');
+}
+
+.nodejs {
+    background-image: url('../images/nodejs.svg');
+}
+
+.centerBottom {
+    -webkit-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
+    transform-origin: center bottom;
+	-webkit-animation: scaler 4s ease-in-out 0s infinite alternate;
+    animation: scaler 4s ease-in-out 0s infinite alternate;
+}
+
+.centerTop {
+    -webkit-transform-origin: center top;
+    -ms-transform-origin: center top;
+    transform-origin: center top;
+	-webkit-animation: scaler 4s ease-in-out 1s infinite alternate;
+    animation: scaler 4s ease-in-out 1s infinite alternate;
+}
+
+.rightTop {
+    -webkit-transform-origin: right top;
+    -ms-transform-origin: right top;
+    transform-origin: right top;
+	-webkit-animation: scaler 4s ease-in-out 2s infinite alternate;
+    animation: scaler 4s ease-in-out 2s infinite alternate;
+}
+
+.leftBottom {
+    -webkit-transform-origin: left bottom;
+    -ms-transform-origin: left bottom;
+    transform-origin: left bottom;
+	-webkit-animation: scaler 4s ease-in-out 3s infinite alternate;
+    animation: scaler 4s ease-in-out 3s infinite alternate;
+}
+
+.rightCenter {
+    -webkit-transform-origin: right center;
+    -ms-transform-origin: right center;
+    transform-origin: right center;
+	-webkit-animation: scaler 4s ease-in-out 4s infinite alternate;
+    animation: scaler 4s ease-in-out 4s infinite alternate;
+}
+
+.leftCenter {
+    -webkit-transform-origin: left center;
+    -ms-transform-origin: left center;
+    transform-origin: left center;
+	-webkit-animation: scaler 4s ease-in-out 5s infinite alternate;
+    animation: scaler 4s ease-in-out 5s infinite alternate;
+}
+
+.rightBottom {
+    -webkit-transform-origin: right bottom;
+    -ms-transform-origin: right bottom;
+    transform-origin: right bottom;
+	-webkit-animation: scaler 4s ease-in-out 6s infinite alternate;
+    animation: scaler 4s ease-in-out 6s infinite alternate;
+}
+
+.leftTop {
+    -webkit-transform-origin: left top;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+	-webkit-animation: scaler 4s ease-in-out 7s infinite alternate;
+    animation: scaler 4s ease-in-out 7s infinite alternate;
+}
+
+@-webkit-keyframes scaler {
+    0% {
+        -webkit-transform: scale(0.0);
+    }
+    100% {
+        -webkit-transform: scale(3.0);
+    }
+}
+
+@keyframes scaler {
+    0% {
+        transform: scale(0.0);
+    }
+    100% {
+        transform: scale(3.0);
+    }
+}
+
+@-webkit-keyframes run {
+    from {left: 100%;}
+    to {left:0px;}
+}
+
+@keyframes run {
+    from {left: 100%;}
+    to {left:0px;}
+}
